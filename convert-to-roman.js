@@ -1,116 +1,108 @@
+function convertOnes(numToConvert){
+  switch(numToConvert){
+    case "1": 
+      return "I";
+    case "2": 
+      return "II";
+    case "3": 
+      return "III";
+    case "4": 
+      return "IV";
+    case "5": 
+     return "V";
+    case "6": 
+      return "VI";   
+    case "7": 
+      return "VII";
+    case "8": 
+      return "VIII";
+    case "9": 
+      return "IX";
+  } 
+}
+
+function convertTens(numToConvert) {
+    switch(numToConvert){
+      case "1": 
+        return "X";
+      case "2": 
+        return "XX";
+      case "3": 
+        return "XXX";
+      case "4": 
+        return "XL";
+      case "5": 
+       return "L";
+      case "6": 
+        return "LX";   
+      case "7": 
+        return "LXX";
+      case "8": 
+        return "LXXX";
+      case "9": 
+        return "XC";
+    } 
+  } 
+
+function convertHundreds(numToConvert) {
+    switch(numToConvert){
+      case "1": 
+        return "C";
+      case "2": 
+        return "CC";
+      case "3": 
+        return "CCC";
+      case "4": 
+        return "CD";
+      case "5": 
+       return "D";
+      case "6": 
+        return "DC";   
+      case "7": 
+        return "DCC";
+      case "8": 
+        return "DCCC";
+      case "9": 
+        return "CM";
+    } 
+  } 
+
+function convertThousands(numToConvert) {
+    switch(numToConvert){
+      case "1": 
+        return "M";
+      case "2": 
+        return "MM";
+      case "3": 
+        return "MMM";
+    } 
+  } 
 
 function convertToRoman(num) {
+  var numStr = num.toString();
+  var numArr = numStr.split("");
   
-    var numStr = num.toString();
-    var numArr = numStr.split("");
-    var romanArr = [];
-    
-    for(var numItem in numArr) {
-      switch(numArr[numItem]){
-        case "1": 
-          romanArr.push("I");
-          break;
-        case "2": 
-          romanArr.push("II");
-          break;
-        case "3": 
-          romanArr.push("III");
-          break;
-        case "4": 
-          romanArr.push("IV");
-          break;
-        case "5": 
-          romanArr.push("V");
-          break;
-        case "6": 
-          romanArr.push("VI");
-          break;   
-        case "7": 
-          romanArr.push("VII");
-          break;
-        case "8": 
-          romanArr.push("VIII");
-          break;
-        case "9": 
-          romanArr.push("IX");
-          break;
-      } 
-    }
-    var romanNum;
-  //   console.log(romanArr,romanArr.length);
-    if (romanArr.length === 1) {
-      romanNum = romanArr.join('');
-      return romanNum;
-    }
-    else if (romanArr.length === 2) {
-      switch(romanArr[0]){
-        case "I": 
-          romanArr.splice(0,1,"X");
-          break;
-        case "II": 
-          romanArr.splice(0,1,"XX");
-          break;
-        case "III": 
-          romanArr.splice(0,1,"XXX");
-          break;
-        case "IV": 
-          romanArr.splice(0,1,"XL");
-          break;
-        case "V": 
-          romanArr.splice(0,1,"L");
-          break;
-        case "VI": 
-          romanArr.splice(0,1,"LX");
-          break;   
-        case "VII": 
-          romanArr.splice(0,1,"LXX");
-          break;
-        case "VIII": 
-          romanArr.splice(0,1,"LXXX");
-          break;
-        case "IX": 
-          romanArr.splice(0,1,"XC");
-          break;
-      }
-      romanNum = romanArr.join('');
-      return romanNum;    
-    }
-    else if (romanArr.length === 3) {
-      
-      switch(romanArr[0]){
-        case "I": 
-          romanArr.splice(0,1,"C");
-          break;
-        case "II": 
-          romanArr.splice(0,1,"CC");
-          break;
-        case "III": 
-          romanArr.splice(0,1,"CCC");
-          break;
-        case "IV": 
-          romanArr.splice(0,1,"CD");
-          break;
-        case "V": 
-          romanArr.splice(0,1,"D");
-          break;
-        case "VI": 
-          romanArr.splice(0,1,"DC");
-          break;   
-        case "VII": 
-          romanArr.splice(0,1,"DCC");
-          break;
-        case "VIII": 
-          romanArr.splice(0,1,"DCCC");
-          break;
-        case "IX": 
-          romanArr.splice(0,1,"CM");
-          break;
-      }
-      romanNum = romanArr.join('');
-      return romanNum; 
-  //   console.log(romanArr);
-    }
+  if (numArr.length === 1) {
+    numArr.splice(0,1,convertOnes(numArr[0])) ;
+    return numArr.join('');
   }
-  
-  convertToRoman(500);
-  
+  else if (numArr.length === 2) {
+    numArr.splice(0,1,convertTens(numArr[0]));
+    numArr.splice(1,1,convertOnes(numArr[1]));
+    return numArr.join('');  
+  }
+  else if (numArr.length === 3) {
+    numArr.splice(0,1,convertHundreds(numArr[0]));
+    numArr.splice(1,1,convertTens(numArr[1]));
+    numArr.splice(2,1,convertOnes(numArr[2]));
+    return numArr.join(''); 
+  }
+  else if (numArr.length === 4) {
+    numArr.splice(0,1,convertThousands(numArr[0]));
+    numArr.splice(1,1,convertHundreds(numArr[1]));
+    numArr.splice(2,1,convertTens(numArr[2]));
+    numArr.splice(3,1,convertOnes(numArr[3]));
+    return numArr.join(''); 
+  }
+}
+convertToRoman(500);
