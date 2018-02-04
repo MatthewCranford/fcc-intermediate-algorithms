@@ -3,43 +3,29 @@ function whatIsInAName(collection, source) {
   // What's in a name?
   var arr = [];
   // Only change code below this line
-//   console.log(collection,source);
-//   console.log(collection[0].hasOwnProperty("first"));
+  var sourceKeys = Object.keys(source);
+  var tempArr = [];
   
   // Check each object in collection for the value of each of its keys 
   for (var object in collection) {
-    console.log(collection[object]);
-    console.log(Object.keys(source));
-    var tempArr = [];
-    for (var key in Object.keys(source)) {
-      
-      console.log(Object.keys(source)[key]);
-      if (collection[object].hasOwnProperty(Object.keys(source)[key]) && collection[object][Object.keys(source)[key]] === source[Object.keys(source)[key]]  ) {
-        console.log(collection[object][Object.keys(source)[key]]);
-        console.log(source[Object.keys(source)[key]]);
+    for (var key in sourceKeys) {
+      if (collection[object][sourceKeys[key]] === source[Object.keys(source)[key]]) {
         tempArr.push(collection[object]);
-        console.log(arr);
       }
       else {
         tempArr = [];
         break;
-      }
-      
+      } 
     }
-    if (tempArr[0] === null) {
-      arr.push(tempArr[0]);  
+    if (tempArr.length === 0) {
+      continue; 
     }
-//     else {
-//       arr.push(tempArr[0]);
-//     }
-    
-//     console.log(collection[object].hasOwnProperty(Object.keys(source)[0]));
-//     if (collection[object].hasOwnProperty(Object.keys(source)) && collection[object][Object.keys(source)] === source[Object.keys(source)]) {
-//       arr.push(collection[object]);
-//     }
-   
+    else {
+      arr.push(tempArr[0]);
+      tempArr = [];
+    }
   }
-  // If key/value pair is equal, add to array
+
   
   // Only change code above this line
   return arr;
