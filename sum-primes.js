@@ -2,26 +2,25 @@
 function sumPrimes(num) {
   var numArr = [];
   var count = 0;
-  // Loop up to num
-  for (var i=2; i<=num; i++) {
-    console.log(i);
-    // Check if prime
+  
+  // for each number up to number
+  for (var i=1; i<=num; i++) {   
+    count = 0;
+    // check if prime
     for (var j=1; j<=i; j++) {
       if ( i % j === 0) {
         count++;
       }
-    if (count === 1) {
+    }
+    if (count === 2) {
       numArr.push(i);
     }
-    }
-   
-      // push to array
-  
-  // loop and sum each num in array
   }
-  
-  console.log(numArr);
-  return num;
+  var total =0;
+  for(var k=0; k<=numArr.length -1 ; k++) {
+    total += numArr[k];
+  }
+  return total;
 }
 
-sumPrimes(10);
+sumPrimes(977);
