@@ -1,6 +1,7 @@
 
 function smallestCommons(arr) {
   
+  // find numerical order
   var first,second;
   if (arr[0] < arr[1]) {
     first = arr[0];
@@ -10,35 +11,41 @@ function smallestCommons(arr) {
     first = arr[1];
     second = arr[0];
   }
-  
-  console.log(first,second);
-  
-  var notFound = false;
-  // while not found
-  while (notFound) {
+
+  var notFound = true; // flag
+  var multiple = 0;
+  var tempFirst = first;
+  var tempSecond = second;
  
-    // while number not equal
-      // if first num is smaller
-        // add itself to first
-      // else second is smaller
-        // add itself second
+  while (notFound) {
+    // prevent second from be least common multiple
+    tempSecond += second;
+    while (tempFirst !== tempSecond) {
+      if (tempFirst < tempSecond) {
+        tempFirst += first;
+      }
+      else {
+        tempSecond += second;
+      }   
     }
     // when both numbers are equal
     // store multiple
+    multiple = tempFirst;
     // for each number between first and second
+    for(var i = first; i < second; i++) {
       // if multiple is divisible by number
-        // flag = true
-      // else
+      if (multiple % i === 0) {
         // flag = false
-        // add first num to itself
-        // break
-  
-    
-    
-  return arr;
-  
- 
+        notFound=false;
+      }
+      else {
+        notFound=true;
+        break;
+      }
+    }
+  }  
+  return multiple;
 }
 
 
-smallestCommons([1,5]);
+smallestCommons([1, 13]);
